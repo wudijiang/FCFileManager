@@ -23,12 +23,18 @@
 +(BOOL)copyItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite;
 +(BOOL)copyItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite error:(NSError **)error;
 
+//    // Documents/a/b
+//    [FCFileManager createDirectoriesForFileAtPath:@"a/b/c"];
 +(BOOL)createDirectoriesForFileAtPath:(NSString *)path;
 +(BOOL)createDirectoriesForFileAtPath:(NSString *)path error:(NSError **)error;
 
+//    // Documents/d/e/f
+//    [FCFileManager createDirectoriesForPath:@"d/e/f"];
 +(BOOL)createDirectoriesForPath:(NSString *)path;
 +(BOOL)createDirectoriesForPath:(NSString *)path error:(NSError **)error;
 
+//    // Documents/d/e/f.text  overwrite YES: 会先删掉再重写；NO：直接返回，不覆盖
+//    [FCFileManager createFileAtPath:@"d/e/f.text" withContent:@"超越自我" overwrite:YES];
 +(BOOL)createFileAtPath:(NSString *)path;
 +(BOOL)createFileAtPath:(NSString *)path error:(NSError **)error;
 
@@ -55,6 +61,7 @@
 +(BOOL)isDirectoryItemAtPath:(NSString *)path;
 +(BOOL)isDirectoryItemAtPath:(NSString *)path error:(NSError **)error;
 
+// 该路径是文件但无内容 或 该路径是文件夹但里面无任何东西
 +(BOOL)isEmptyItemAtPath:(NSString *)path;
 +(BOOL)isEmptyItemAtPath:(NSString *)path error:(NSError **)error;
 
@@ -65,12 +72,15 @@
 +(BOOL)isReadableItemAtPath:(NSString *)path;
 +(BOOL)isWritableItemAtPath:(NSString *)path;
 
+// deep:NO 获取当前目录下的子目录（不递归）；YES：递归获取该目录下的所有子目录（1/2, 1/2/a, 1/2/b,1/2/c）
 +(NSArray *)listDirectoriesInDirectoryAtPath:(NSString *)path;
 +(NSArray *)listDirectoriesInDirectoryAtPath:(NSString *)path deep:(BOOL)deep;
 
+// deep:NO 获取当前目录下的文件（不递归）；YES：递归获取该目录下的所有文件
 +(NSArray *)listFilesInDirectoryAtPath:(NSString *)path;
 +(NSArray *)listFilesInDirectoryAtPath:(NSString *)path deep:(BOOL)deep;
 
+// 过滤包含有该扩展的
 +(NSArray *)listFilesInDirectoryAtPath:(NSString *)path withExtension:(NSString *)extension;
 +(NSArray *)listFilesInDirectoryAtPath:(NSString *)path withExtension:(NSString *)extension deep:(BOOL)deep;
 
@@ -80,6 +90,7 @@
 +(NSArray *)listFilesInDirectoryAtPath:(NSString *)path withSuffix:(NSString *)suffix;
 +(NSArray *)listFilesInDirectoryAtPath:(NSString *)path withSuffix:(NSString *)suffix deep:(BOOL)deep;
 
+// 返回所有的子路径及子路径的子路径（包含文件及文件夹）
 +(NSArray *)listItemsInDirectoryAtPath:(NSString *)path deep:(BOOL)deep;
 
 +(BOOL)moveItemAtPath:(NSString *)path toPath:(NSString *)toPath;
@@ -139,6 +150,7 @@
 +(NSString *)readFileAtPathAsString:(NSString *)path;
 +(NSString *)readFileAtPathAsString:(NSString *)path error:(NSError **)error;
 
+// 移除该目录下的文件（不移除子目录）
 +(BOOL)removeFilesInDirectoryAtPath:(NSString *)path;
 +(BOOL)removeFilesInDirectoryAtPath:(NSString *)path error:(NSError **)error;
 
@@ -151,9 +163,11 @@
 +(BOOL)removeFilesInDirectoryAtPath:(NSString *)path withSuffix:(NSString *)suffix;
 +(BOOL)removeFilesInDirectoryAtPath:(NSString *)path withSuffix:(NSString *)suffix error:(NSError **)error;
 
+// 移除该文件夹下的所有文件及文件夹，只保留该文件夹
 +(BOOL)removeItemsInDirectoryAtPath:(NSString *)path;
 +(BOOL)removeItemsInDirectoryAtPath:(NSString *)path error:(NSError **)error;
 
+// 删掉该文件夹
 +(BOOL)removeItemAtPath:(NSString *)path;
 +(BOOL)removeItemAtPath:(NSString *)path error:(NSError **)error;
 
