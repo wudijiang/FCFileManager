@@ -167,7 +167,7 @@
 +(BOOL)removeItemsInDirectoryAtPath:(NSString *)path;
 +(BOOL)removeItemsInDirectoryAtPath:(NSString *)path error:(NSError **)error;
 
-// 删掉该文件夹
+// 删掉该文件夹或文件
 +(BOOL)removeItemAtPath:(NSString *)path;
 +(BOOL)removeItemAtPath:(NSString *)path error:(NSError **)error;
 
